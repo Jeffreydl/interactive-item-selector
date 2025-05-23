@@ -7,8 +7,8 @@
 Install dependencies and start the project:
 
 ```bash
-git clone https://github.com/Jeffreydl/angular-test.git
-cd angular-test
+git clone https://github.com/Jeffreydl/interactive-item-selector.git
+cd interactive-item-selector
 npm install
 npm start
 ```
