@@ -1,0 +1,59 @@
+<ul class="folder-tree">
+  @for (entry of entries(); track entry[0]) {
+    <li>
+      <details open>
+        <summary [style.--depth]="depth()">
+          <span class="checkbox-and-label">
+            <input
+              type="checkbox"
+              [id]="sanitizeId(entry[1].title)"
+              [checked]="getCheckboxState(entry[1]) === 'checked'"
+              [indeterminate]="getCheckboxState(entry[1]) === 'indeterminate'"
+              (change)="folderToggled.emit({ node: entry[1], checked: getCheckboxStatus($event) })"
+            />
+            <label class="bold" [for]="sanitizeId(entry[1].title)">{{ entry[1].title }}</label>
+          </span>
+
+          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <polyline
+              points="4 10 12 17 20 10"
+              fill="none"
+              stroke="#3B3E3F"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </summary>
+
+        @if (entry[1].subfolders) {
+          <app-folder-tree
+            [folderTree]="entry[1].subfolders!"
+            [selectedItems]="selectedItems()"
+            [depth]="depth() + 1"
+            (folderToggled)="folderToggled.emit($event)"
+            (itemToggled)="itemToggled.emit($event)"
+          />
+        }
+
+        @if (entry[1].items.length > 0) {
+          <ul>
+            @for (item of entry[1].items; track item) {
+              <li class="list-item" [style.--depth]="depth()">
+                <span>
+                  <input
+                    type="checkbox"
+                    [id]="sanitizeId(item.title)"
+                    [checked]="isItemChecked(item.id)"
+                    (change)="itemToggled.emit({ itemId: item.id, checked: getCheckboxStatus($event) })"
+                  />
+                  <label [for]="sanitizeId(item.title)">{{ item.title }}</label>
+                </span>
+              </li>
+            }
+          </ul>
+        }
+      </details>
+    </li>
+  }
+</ul>

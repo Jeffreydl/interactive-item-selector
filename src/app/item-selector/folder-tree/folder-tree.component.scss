@@ -1,0 +1,70 @@
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 34px;
+  padding-left: calc(var(--depth, 1) * 16px) !important;
+  padding-right: 16px !important;
+  user-select: none;
+  transition: background-color 0.2s;
+  pointer-events: none; // only open/close with chevron
+}
+
+summary:hover {
+  background-color: hsl(0, 0%, 96%);
+  cursor: pointer;
+}
+
+details > summary > .chevron {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+  pointer-events: auto;
+}
+
+details[open] > summary > .chevron {
+  transform: rotate(180deg);
+}
+
+.list-item {
+  position: relative;
+  transition: background-color 0.2s;
+  padding-left: calc(var(--depth, 1) * 16px + 16px) !important;
+  pointer-events: none;
+}
+
+.list-item:hover:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  background-color: hsl(0, 0%, 96%);
+}
+
+span {
+  display: flex;
+  align-items: center;
+  height: 34px;
+}
+
+input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+input, label {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: 600;
+}

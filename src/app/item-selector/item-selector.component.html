@@ -1,0 +1,18 @@
+  <section class="item-selector-section">
+    <div class="folder-tree-list">
+      @if (folderTree()) {
+        <app-folder-tree
+          [folderTree]="folderTree()!"
+          [selectedItems]="selectedItems()"
+          (folderToggled)="onFolderToggle($event)"
+          (itemToggled)="onItemToggle($event)"
+        />
+      }
+    </div>
+
+
+    <p class="selected-items">Selected item IDs: {{ selectedItemsAsArray.join(', ') }}</p>
+    <button class="clear-selection-btn" type="button" (click)="clearSelection()">
+      Clear selection
+    </button>
+  </section>
